@@ -1,0 +1,23 @@
+{
+    "name": "falc/flysystem-sftp-symlink-plugin",
+    "description": "Sftp symlink plugin for Flysystem.",
+    "keywords": ["sftp", "symlink", "flysystem", "plugin"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aitor García",
+            "email": "aitor.falc@gmail.com",
+            "homepage": "http://aitorgarcia.org/"
+        }
+    ],
+    "require": {
+        "league/flysystem": "0.5.*",
+        "phpseclib/phpseclib": "~0.3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Falc\\Flysystem\\Plugin\\Symlink\\Sftp\\": "src/"
+        }
+    }
+}
