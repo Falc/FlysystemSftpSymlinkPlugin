@@ -51,11 +51,11 @@ class Symlink implements PluginInterface
      *
      * Creates a symlink.
      *
-     * @param   string  $symlink    Symlink name.
      * @param   string  $target     Symlink target.
+     * @param   string  $symlink    Symlink name.
      * @return  boolean             True on success. False on failure.
      */
-    public function handle($symlink, $target)
+    public function handle($target, $symlink)
     {
         $connection = $this->filesystem->getAdapter()->getConnection();
         $output = $connection->exec('ln -s '.$target.' '.$symlink);

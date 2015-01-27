@@ -22,8 +22,6 @@ Using composer:
 This plugin requires a `Filesystem` instance using the [Sftp adapter](http://flysystem.thephpleague.com/adapter/sftp/).
 
 ```php
-<?php
-
 use Falc\Flysystem\Plugin\Symlink\Sftp as SftpSymlinkPlugin;
 use League\Flysystem\Adapter\Sftp as SftpAdapter;
 use League\Flysystem\Filesystem;
@@ -41,12 +39,12 @@ $filesystem = new Filesystem(new SftpAdapter(array(
 
 ### Symlink
 
-Use `symlink($symlink, $target)` to create a symlink.
+Use `symlink($target, $symlink)` to create a symlink.
 
 ```php
 $filesystem->addPlugin(new SftpSymlinkPlugin\Symlink());
 
-$success = $filesystem->symlink('/tmp/symlink', '/tmp/some/target');
+$success = $filesystem->symlink('/tmp/some/target', '/tmp/symlink');
 ```
 
 ### DeleteSymlink
