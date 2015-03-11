@@ -2,8 +2,8 @@
 
 ## Requirements
 
-+ [Flysystem](http://flysystem.thephpleague.com/) >= 0.5.0
-+ [phpseclib](https://github.com/phpseclib/phpseclib) >= 0.3.5
++ [Flysystem](http://flysystem.thephpleague.com/) >= 1.0.0
++ [flysystem-sftp](https://github.com/thephpleague/flysystem-sftp) >= 1.0.0
 
 ## Installation
 
@@ -12,7 +12,7 @@ Using composer:
 ```json
 {
     "require": {
-        "falc/flysystem-sftp-symlink-plugin": "dev-master"
+        "falc/flysystem-sftp-symlink-plugin": "1.*"
     }
 }
 ```
@@ -28,7 +28,7 @@ use League\Flysystem\Filesystem;
 
 $filesystem = new Filesystem(new SftpAdapter(array(
     'host' => 'example.com',
-    'port' => 21,
+    'port' => 22,
     'username' => 'username',
     'password' => 'password',
     'privateKey' => 'path/to/or/contents/of/privatekey',
