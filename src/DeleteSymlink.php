@@ -56,6 +56,8 @@ class DeleteSymlink implements PluginInterface
      */
     public function handle($symlink)
     {
+        $symlink = $this->filesystem->getAdapter()->getRoot().ltrim($symlink, '/');
+
         $connection = $this->filesystem->getAdapter()->getConnection();
         $output = $connection->exec('if [ -h '.$symlink.' ]; then echo 1; else echo 0; fi');
 

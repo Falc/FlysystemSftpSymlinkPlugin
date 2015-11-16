@@ -56,6 +56,8 @@ class IsSymlink implements PluginInterface
      */
     public function handle($filename)
     {
+        $filename = $this->filesystem->getAdapter()->getRoot().ltrim($filename, '/');
+
         $connection = $this->filesystem->getAdapter()->getConnection();
         $output = $connection->exec('if [ -h '.$filename.' ]; then echo 1; else echo 0; fi');
 

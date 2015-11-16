@@ -57,6 +57,10 @@ class Symlink implements PluginInterface
      */
     public function handle($target, $symlink)
     {
+        $pathPrefix = $this->filesystem->getAdapter()->getRoot();
+        $target = $pathPrefix.ltrim($target, '/');
+        $symlink = $pathPrefix.ltrim($symlink, '/');
+
         $connection = $this->filesystem->getAdapter()->getConnection();
         $output = $connection->exec('ln -s '.$target.' '.$symlink);
 
