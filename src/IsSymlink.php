@@ -59,8 +59,6 @@ class IsSymlink implements PluginInterface
         $filename = $this->filesystem->getAdapter()->getRoot().ltrim($filename, '/');
 
         $connection = $this->filesystem->getAdapter()->getConnection();
-        $output = $connection->exec('if [ -h '.$filename.' ]; then echo 1; else echo 0; fi');
-
-        return (trim($output) === '1');
+        return $connection->is_link($filename);
     }
 }
