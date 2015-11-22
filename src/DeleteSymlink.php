@@ -60,10 +60,10 @@ class DeleteSymlink implements PluginInterface
 
         $connection = $this->filesystem->getAdapter()->getConnection();
 
-        if ($connection->is_link($symlink)) {
-            return $connection->delete($symlink, false);
+        if (!$connection->is_link($symlink)) {
+            return false;
         }
 
-        return false;
+        return $connection->delete($symlink, false);
     }
 }
