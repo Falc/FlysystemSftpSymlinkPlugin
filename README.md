@@ -9,6 +9,12 @@
 
 Using composer:
 
+```
+composer require falc/flysystem-sftp-symlink-plugin
+```
+
+Or add it manually:
+
 ```json
 {
     "require": {
@@ -32,7 +38,7 @@ $filesystem = new Filesystem(new SftpAdapter(array(
     'username' => 'username',
     'password' => 'password',
     'privateKey' => 'path/to/or/contents/of/privatekey',
-    'root' => '/path/to/root',
+    'root' => '/',
     'timeout' => 10
 )));
 ```
@@ -65,4 +71,35 @@ Use `isSymlink($filename)` to check if a file exists and is a symlink.
 $filesystem->addPlugin(new SftpSymlinkPlugin\IsSymlink());
 
 $isSymlink = $filesystem->isSymlink('/tmp/symlink');
+```
+
+### Full and relative paths
+
+The above examples show how to create symlinks using `/` as root and full paths. But it is possible to use relative paths too.
+
+```php
+use Falc\Flysystem\Plugin\Symlink\Sftp as SftpSymlinkPlugin;
+use League\Flysystem\Adapter\Sftp as SftpAdapter;
+use League\Flysystem\Filesystem;
+
+$filesystem = new Filesystem(new SftpAdapter(array(
+    'host' => 'example.com',
+    'port' => 22,
+    'username' => 'username',
+    'password' => 'password',
+    'privateKey' => 'path/to/or/contents/of/privatekey',
+    'root' => '/home/falc',
+    'timeout' => 10
+)));
+
+$filesystem->addPlugin(new SftpSymlinkPlugin\Symlink());
+$filesystem->addPlugin(new SftpSymlinkPlugin\IsSymlink());
+$filesystem->addPlugin(new SftpSymlinkPlugin\DeleteSymlink());
+
+// Result: /home/falc/flytest -> /home/falc/projects/cli/flytest
+$filesystem->symlink('projects/cli/flytest', 'flytest');
+
+// It is possible to check it or delete it in the same way:
+$isSymlink = $filesystem->isSymlink('flytest');
+$filesystem->deleteSymlink('flytest');
 ```
